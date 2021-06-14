@@ -1,5 +1,4 @@
 from talon import Context, actions, ui, Module, app, clip
-from typing import List, Union
 
 is_mac = app.platform == "mac"
 
@@ -48,13 +47,13 @@ class win_actions:
 
 @ctx.action_class("edit")
 class edit_actions:
-    def find(text: str):
+    def find(text = None):
         if is_mac:
             actions.key("cmd-f")
         else:
             actions.key("ctrl-f")
-
-        actions.insert(text)
+        if text is not None:
+            actions.insert(text)
 
     def line_swap_up():
         actions.key("alt-up")
@@ -69,6 +68,7 @@ class edit_actions:
         actions.user.vscode("workbench.action.gotoLine")
         actions.insert(str(n))
         actions.key("enter")
+        actions.edit.line_start()
 
 
 @mod.action_class
@@ -94,23 +94,27 @@ class Actions:
         actions.edit.paste()
         actions.key("enter")
 
+    def vscode_terminal(number: int):
+        """Activate a terminal by number"""
+        actions.user.vscode(f"workbench.action.terminal.focusAtIndex{number}")
+
 
 @ctx.action_class("user")
 class user_actions:
     # snippet.py support beginHelp close
     def snippet_search(text: str):
-        actions.user.vscode("Insert Snippet")
+        actions.user.vscode("editor.action.insertSnippet")
         actions.insert(text)
 
     def snippet_insert(text: str):
         """Inserts a snippet"""
-        actions.user.vscode("Insert Snippet")
+        actions.user.vscode("editor.action.insertSnippet")
         actions.insert(text)
         actions.key("enter")
 
     def snippet_create():
         """Triggers snippet creation"""
-        actions.user.vscode("Preferences: Configure User Snippets")
+        actions.user.vscode("workbench.action.openSnippets")
 
     # snippet.py support end
 
@@ -151,10 +155,10 @@ class user_actions:
             actions.insert(text)
 
     def find_next():
-        actions.key("enter")
+        actions.user.vscode("editor.action.nextMatchFindAction")
 
     def find_previous():
-        actions.key("shift-enter")
+        actions.user.vscode("editor.action.previousMatchFindAction")
 
     def find_everywhere(text: str):
         """Triggers find across project"""
@@ -230,6 +234,3 @@ class user_actions:
         actions.edit.find(text)
         actions.sleep("100ms")
         actions.key("esc")
-
-    # find_and_replace.py support end
-
