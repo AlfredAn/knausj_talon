@@ -3,10 +3,10 @@ from typing import Set
 from talon import Module, Context, actions, app
 import sys
 
-default_alphabet = "air bat cap drum each fine gust harp sit jury crunch look made near odd pit quench red sun trap urge vest whale plex yank zip".split(
+default_alphabet = "air bat cap drum each fine gust harp spit jury crunch look made near odd pill quench red sun trap urge vest whale plex yank zip aurora antlion earth".split(
     " "
 )
-letters_string = "abcdefghijklmnopqrstuvwxyz"
+letters_string = "abcdefghijklmnopqrstuvwxyzåäö"
 
 default_digits = "zero one two three four five six seven eight nine".split(" ")
 numbers = [str(i) for i in range(10)]
@@ -210,23 +210,25 @@ ctx.lists["self.arrow_key"] = {
 }
 
 simple_keys = [
-    "end",
     "enter",
     "escape",
-    "home",
     "insert",
     "pagedown",
     "pageup",
     "space",
-    "tab",
+    "delete",
+    "backspace"
 ]
 
 alternate_keys = {
-    "delete": "backspace",
-    "forward delete": "delete",
+    #"delete": "backspace",
+    #"forward delete": "delete",
     #'junk': 'backspace',
     "page up": "pageup",
     "page down": "pagedown",
+    "home key": "home",
+    "end key": "end",
+    "tabber": "tab"
 }
 # mac apparently doesn't have the menu key.
 if app.platform in ("windows", "linux"):
@@ -237,7 +239,7 @@ special_keys = {k: k for k in simple_keys}
 special_keys.update(alternate_keys)
 ctx.lists["self.special_key"] = special_keys
 ctx.lists["self.function_key"] = {
-    f"F {default_f_digits[i]}": f"f{i + 1}" for i in range(12)
+    f"Fun {default_f_digits[i]}": f"f{i + 1}" for i in range(12)
 }
 
 
