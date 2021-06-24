@@ -230,7 +230,7 @@ alternate_keys = {
     "page down": "pagedown",
     "home key": "home",
     "end key": "end",
-    "tabber": "tab"
+    "tab": "tab"
 }
 # mac apparently doesn't have the menu key.
 if app.platform in ("windows", "linux"):

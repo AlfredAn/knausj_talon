@@ -1,5 +1,8 @@
 go <user.arrow_keys>: key(arrow_keys)
 <user.letter>: key(letter)
+<user.letter> dupe:
+    key(letter)
+    key(letter)
 (ship | uppercase) <user.letters> [(lowercase | sunk)]: 
     user.insert_formatted(letters, "ALL_CAPS")
 <user.symbol_key>: key(symbol_key)
