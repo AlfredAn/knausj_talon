@@ -1,4 +1,5 @@
 not mode: sleep
+and not mode: swedish
 -
 ^dictation mode$:
     mode.disable("sleep")

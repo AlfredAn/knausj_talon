@@ -1,5 +1,5 @@
 from .user_settings import get_list_from_csv
-from talon import Module, Context
+from talon import Module, Context, actions
 from urllib.parse import quote_plus
 import webbrowser
 
@@ -50,6 +50,11 @@ class Actions:
     def open_url(url: str):
         """Visit the given URL."""
         webbrowser.open(url)
+    
+    def open_subreddit(name: str):
+        """Open the given subreddit."""
+        url = actions.user.formatted_text(name, "NO_SPACES")
+        webbrowser.open(f"https://www.reddit.com/r/{url}")
 
     def search_with_search_engine(search_template: str, search_text: str):
         """Search a search engine for given text"""

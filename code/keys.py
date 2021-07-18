@@ -3,7 +3,7 @@ from typing import Set
 from talon import Module, Context, actions, app
 import sys
 
-default_alphabet = "air bat cap drum each fine gust harp spit jury crunch look made near odd pill quench red sun trap urge vest whale plex yank zip aurora antlion earth".split(
+default_alphabet = "air bat cap drum each fine gust harp spit jury crunch look made near orc pill quench red sing trap urge vest whale plex yank zip aurora antlion earth".split(
     " "
 )
 letters_string = "abcdefghijklmnopqrstuvwxyzåäö"
@@ -24,11 +24,28 @@ mod.list("function_key", desc="All function keys")
 mod.list("special_key", desc="All special keys")
 mod.list("punctuation", desc="words for inserting punctuation into text")
 
+modifier_list = [
+    ("soup", "super"),
+    ("cone", "ctrl"),
+    ("alt", "alt"),
+    ("shift", "shift"),
+]
 
-@mod.capture(rule="{self.modifier_key}+")
+modifier_keys = {}
+mods = "("
+for i in range(0, len(modifier_list)):
+    modifier_keys[modifier_list[i][0]] = modifier_list[i][1]
+    if i > 0:
+        mods += ")|"
+    mods += f"({modifier_list[i][0]}"
+    for j in range(i+1, len(modifier_list)):
+        mods += f" [{modifier_list[j][0]}]"
+mods += "))"
+
+@mod.capture(rule=f"{mods}")
 def modifiers(m) -> str:
     "One or more modifier keys"
-    return "-".join(m.modifier_key_list)
+    return "-".join(map(lambda x: modifier_keys[x], str(m).split(" ")))
 
 
 @mod.capture(rule="{self.arrow_key}")
@@ -87,15 +104,10 @@ def unmodified_key(m) -> str:
     "A single key with no modifiers"
     return str(m)
 
-
-@mod.capture(rule="{self.modifier_key}* <self.unmodified_key>")
+@mod.capture(rule="[{self.modifiers}] <self.unmodified_key>")
 def key(m) -> str:
     "A single key with optional modifiers"
-    try:
-        mods = m.modifier_key_list
-    except AttributeError:
-        mods = []
-    return "-".join(mods + [m.unmodified_key])
+    return "-".join(m.modifiers + [m.unmodified_key])
 
 
 @mod.capture(rule="<self.key>+")
@@ -111,16 +123,6 @@ def letters(m) -> str:
 
 
 ctx = Context()
-modifier_keys = {
-    # If you find 'alt' is often misrecognized, try using 'alter'.
-    "alt": "alt",  #'alter': 'alt',
-    "control": "ctrl",  #'troll':   'ctrl',
-    "shift": "shift",  #'sky':     'shift',
-    "super": "super",
-}
-if app.platform  == "mac":
-    modifier_keys["command"] = "cmd"
-    modifier_keys["option"] = "alt"
 ctx.lists["self.modifier_key"] = modifier_keys
 alphabet = dict(zip(default_alphabet, letters_string))
 ctx.lists["self.letter"] = alphabet
@@ -177,10 +179,13 @@ symbol_key_words = {
     "left paren": "(",
     "R paren": ")",
     "right paren": ")",
+    "unpair": ")",
+    "unparen": ")",
     "brace": "{",
     "left brace": "{",
     "R brace": "}",
     "right brace": "}",
+    "unbrace": "}",
     "angle": "<",
     "left angle": "<",
     "less than": "<",
@@ -188,6 +193,7 @@ symbol_key_words = {
     "R angle": ">",
     "right angle": ">",
     "greater than": ">",
+    "unangle": ">",
     "star": "*",
     "pound": "#",
     "hash": "#",
@@ -219,18 +225,15 @@ simple_keys = [
     "pageup",
     "space",
     "delete",
-    "backspace"
+    "backspace",
+    "tab"
 ]
 
 alternate_keys = {
-    #"delete": "backspace",
-    #"forward delete": "delete",
-    #'junk': 'backspace',
     "page up": "pageup",
     "page down": "pagedown",
     "home key": "home",
-    "end key": "end",
-    "tab": "tab"
+    "end key": "end"
 }
 # mac apparently doesn't have the menu key.
 if app.platform in ("windows", "linux"):

@@ -11,8 +11,10 @@ scales = "hundred thousand million billion trillion quadrillion quintillion sext
 
 digits_map = {n: i for i, n in enumerate(digits)}
 digits_map["oh"] = 0
+one_through_nine_map = {n: i for i, n in enumerate(digits[1:])}
 teens_map = {n: i + 11 for i, n in enumerate(teens)}
 tens_map = {n: 10 * (i + 1) for i, n in enumerate(tens)}
+twenty_through_ninety_map = {n: 10 * (i + 1) for i, n in enumerate(tens[1:])}
 scales_map = {n: 10 ** (3 * (i+1)) for i, n in enumerate(scales[1:])}
 scales_map["hundred"] = 100
 
@@ -114,6 +116,7 @@ def split_list(value, l: list) -> Iterator:
 
 
 # # ---------- TESTS (uncomment to run) ----------
+# note: the tests containing "and" do not apply to this version of the file
 # def test_number(expected, string):
 #     print('testing:', string)
 #     l = list(scan_small_numbers(string.split()))
@@ -151,8 +154,10 @@ def split_list(value, l: list) -> Iterator:
 
 # ---------- CAPTURES ----------
 alt_digits = "(" + ("|".join(digits_map.keys())) + ")"
+alt_one_through_nine = "(" + ("|".join(one_through_nine_map.keys())) + ")"
 alt_teens = "(" + ("|".join(teens_map.keys())) + ")"
 alt_tens = "(" + ("|".join(tens_map.keys())) + ")"
+alt_twenty_through_ninety = "(" + ("|".join(twenty_through_ninety_map.keys())) + ")"
 alt_scales = "(" + ("|".join(scales_map.keys())) + ")"
 number_word = "(" + "|".join(numbers_map.keys()) + ")"
 
@@ -160,12 +165,19 @@ number_word = "(" + "|".join(numbers_map.keys()) + ")"
 @ctx.capture("digit_string", rule=f"({alt_digits} | {alt_teens} | {alt_tens})+")
 def digit_string(m) -> str: return parse_number(list(m))
 
+@mod.capture(rule=f"({alt_one_through_nine} | {alt_teens} | {alt_tens}) ({alt_digits} | {alt_teens} | {alt_tens})*")
+def positive_digit_string(m) -> str: return parse_number(list(m))
+
+@mod.capture(rule="<user.positive_digit_string> | zero")
+def alt_digit_string(m) -> str:
+    return "0" if m[0] == "zero" else m[0]
+
 @ctx.capture("digits", rule="<digit_string>")
 def digits(m) -> int:
     """Parses a phrase representing a digit sequence, returning it as an integer."""
     return int(m.digit_string)
 
-@mod.capture(rule=f"{number_word}+ (and {number_word}+)*")
+@mod.capture(rule=f"{number_word}+")
 def number_string(m) -> str:
     """Parses a number phrase, returning that number as a string."""
     return parse_number(list(m))
@@ -181,6 +193,6 @@ def number_signed(m):
     return -number if (m[0] in ["negative", "minus"]) else number
 
 @ctx.capture(
-    "number_small", rule=f"({alt_digits} | {alt_teens} | {alt_tens} [{alt_digits}])"
+    "number_small", rule=f"(zero | {alt_one_through_nine} | {alt_teens} | ten | {alt_twenty_through_ninety} [{alt_one_through_nine}] | [one] hundred)"
 )
 def number_small(m): return int(parse_number(list(m)))

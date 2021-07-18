@@ -281,7 +281,7 @@ def on_pop(active):
         if setting_mouse_enable_pop_click.get() >= 1:
             ctrl.mouse_click(button=0, hold=16000)
     # pop to click even when not using eye tracking
-    elif actions.speech.enabled():
+    elif actions.speech.enabled() and not eye_zoom_mouse.zoom_mouse.enabled:
         ctrl.mouse_click(button=0, hold=16000)
         actions.user.grid_close()
 

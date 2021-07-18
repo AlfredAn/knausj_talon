@@ -1,8 +1,5 @@
 go <user.arrow_keys>: key(arrow_keys)
 <user.letter>: key(letter)
-<user.letter> dupe:
-    key(letter)
-    key(letter)
 (ship | uppercase) <user.letters> [(lowercase | sunk)]: 
     user.insert_formatted(letters, "ALL_CAPS")
 <user.symbol_key>: key(symbol_key)
@@ -10,3 +7,5 @@ go <user.arrow_keys>: key(arrow_keys)
 <user.special_key>: key(special_key)
 <user.modifiers> <user.unmodified_key>: key("{modifiers}-{unmodified_key}")
 just <user.modifiers>: key(user.modifiers)
+jump: key(tab)
+all tab: key(alt-tab)

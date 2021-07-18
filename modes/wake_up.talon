@@ -1,5 +1,5 @@
 #defines the commands that sleep/wake Talon
-mode: all
+not mode: swedish
 -
 ^sleep all$:
     user.switcher_hide_running()

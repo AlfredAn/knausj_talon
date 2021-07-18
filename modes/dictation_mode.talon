@@ -1,4 +1,5 @@
 mode: dictation
+and not mode: swedish
 -
 ^press <user.keys>$: key("{keys}")
 
