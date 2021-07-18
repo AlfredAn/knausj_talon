@@ -5,16 +5,15 @@ mod = Module()
 ctx = Context()
 
 digits = "zero one two three four five six seven eight nine".split()
-teens = "eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen".split()
-tens = "ten twenty thirty forty fifty sixty seventy eighty ninety".split()
+teens = "ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen".split()
+tens = "twenty thirty forty fifty sixty seventy eighty ninety".split()
 scales = "hundred thousand million billion trillion quadrillion quintillion sextillion septillion octillion nonillion decillion".split()
 
 digits_map = {n: i for i, n in enumerate(digits)}
 digits_map["oh"] = 0
 one_through_nine_map = {n: i for i, n in enumerate(digits[1:])}
-teens_map = {n: i + 11 for i, n in enumerate(teens)}
-tens_map = {n: 10 * (i + 1) for i, n in enumerate(tens)}
-twenty_through_ninety_map = {n: 10 * (i + 1) for i, n in enumerate(tens[1:])}
+teens_map = {n: i + 10 for i, n in enumerate(teens)}
+tens_map = {n: 10 * (i + 2) for i, n in enumerate(tens)}
 scales_map = {n: 10 ** (3 * (i+1)) for i, n in enumerate(scales[1:])}
 scales_map["hundred"] = 100
 
@@ -46,7 +45,7 @@ def scan_small_numbers(l: List[str]) -> Iterator[Union[str,int]]:
     while l:
         n = l.pop()
         # fuse tens onto digits, eg. "twenty", "one" -> 21
-        if n in tens_map and n != "ten" and l and digits_map.get(l[-1], 0) != 0:
+        if n in tens_map and l and digits_map.get(l[-1], 0) != 0:
             d = l.pop()
             yield numbers_map[n] + numbers_map[d]
         # turn small number terms into corresponding numbers
@@ -157,7 +156,6 @@ alt_digits = "(" + ("|".join(digits_map.keys())) + ")"
 alt_one_through_nine = "(" + ("|".join(one_through_nine_map.keys())) + ")"
 alt_teens = "(" + ("|".join(teens_map.keys())) + ")"
 alt_tens = "(" + ("|".join(tens_map.keys())) + ")"
-alt_twenty_through_ninety = "(" + ("|".join(twenty_through_ninety_map.keys())) + ")"
 alt_scales = "(" + ("|".join(scales_map.keys())) + ")"
 number_word = "(" + "|".join(numbers_map.keys()) + ")"
 
@@ -193,6 +191,6 @@ def number_signed(m):
     return -number if (m[0] in ["negative", "minus"]) else number
 
 @ctx.capture(
-    "number_small", rule=f"(zero | {alt_one_through_nine} | {alt_teens} | ten | {alt_twenty_through_ninety} [{alt_one_through_nine}] | [one] hundred)"
+    "number_small", rule=f"(zero | {alt_one_through_nine} | {alt_teens} | {alt_tens} [{alt_one_through_nine}] | [one] hundred)"
 )
 def number_small(m): return int(parse_number(list(m)))
