@@ -1,4 +1,4 @@
-now <number_small>: core.repeat_command(number_small)
+reap <number_small>: core.repeat_command(number_small)
 dupe | twice: core.repeat_command(1)
 trip: core.repeat_command(2)
 quad: core.repeat_command(3)

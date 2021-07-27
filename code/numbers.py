@@ -42,8 +42,13 @@ def scan_small_numbers(l: List[str]) -> Iterator[Union[str,int]]:
     """
     # reversed so that repeated pop() visits in left-to-right order
     l = [x for x in reversed(l) if x != "and"]
+    previous = None
     while l:
         n = l.pop()
+        if n == "do" and previous is not None:
+            n = previous
+        else:
+            previous = n
         # fuse tens onto digits, eg. "twenty", "one" -> 21
         if n in tens_map and l and digits_map.get(l[-1], 0) != 0:
             d = l.pop()
@@ -160,10 +165,10 @@ alt_scales = "(" + ("|".join(scales_map.keys())) + ")"
 number_word = "(" + "|".join(numbers_map.keys()) + ")"
 
 # TODO: allow things like "double eight" for 88
-@ctx.capture("digit_string", rule=f"({alt_digits} | {alt_teens} | {alt_tens})+")
+@ctx.capture("digit_string", rule=f"({alt_digits} [do] | {alt_teens} | {alt_tens})+")
 def digit_string(m) -> str: return parse_number(list(m))
 
-@mod.capture(rule=f"({alt_one_through_nine} | {alt_teens} | {alt_tens}) ({alt_digits} | {alt_teens} | {alt_tens})*")
+@mod.capture(rule=f"({alt_one_through_nine} [do] | {alt_teens} | {alt_tens}) ({alt_digits} [do] | {alt_teens} | {alt_tens})*")
 def positive_digit_string(m) -> str: return parse_number(list(m))
 
 @mod.capture(rule="<user.positive_digit_string> | zero")
@@ -175,7 +180,7 @@ def digits(m) -> int:
     """Parses a phrase representing a digit sequence, returning it as an integer."""
     return int(m.digit_string)
 
-@mod.capture(rule=f"{number_word}+")
+@mod.capture(rule=f"({number_word} | {alt_digits} do)+")
 def number_string(m) -> str:
     """Parses a number phrase, returning that number as a string."""
     return parse_number(list(m))
