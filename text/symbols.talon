@@ -35,9 +35,12 @@ empty escaped string:
 inside (squares | square brackets | list):
 	insert("[]")
 	key(left)
-inside (bracket | braces):
+inside (bracket | braces | bracks):
 	insert("{}")
 	key(left)
+inside angles:
+    insert("<>")
+    key(left)
 inside percent:
 	insert("%%")
 	key(left)

@@ -8,6 +8,7 @@ digits = "zero one two three four five six seven eight nine".split()
 teens = "ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen".split()
 tens = "twenty thirty forty fifty sixty seventy eighty ninety".split()
 scales = "hundred thousand million billion trillion quadrillion quintillion sextillion septillion octillion nonillion decillion".split()
+multipliers = "dupe trip quad quint".split()
 
 digits_map = {n: i for i, n in enumerate(digits)}
 digits_map["oh"] = 0
@@ -16,6 +17,7 @@ teens_map = {n: i + 10 for i, n in enumerate(teens)}
 tens_map = {n: 10 * (i + 2) for i, n in enumerate(tens)}
 scales_map = {n: 10 ** (3 * (i+1)) for i, n in enumerate(scales[1:])}
 scales_map["hundred"] = 100
+multiplier_map = {n: i for i, n in enumerate(multipliers)}
 
 numbers_map = digits_map.copy()
 numbers_map.update(teens_map)
@@ -41,14 +43,20 @@ def scan_small_numbers(l: List[str]) -> Iterator[Union[str,int]]:
     Does nothing to scale words ("hundred", "thousand", "million", etc).
     """
     # reversed so that repeated pop() visits in left-to-right order
-    l = [x for x in reversed(l) if x != "and"]
+    l = [x for x in reversed(l) if x != "and" and x != "a"]
     previous = None
-    while l:
-        n = l.pop()
-        if n == "do" and previous is not None:
-            n = previous
+    i = 0
+    while l or i > 0:
+        if i == 0:
+            n = l.pop()
+            if n in multiplier_map and previous is not None:
+                i = multiplier_map[n]
+                n = previous
+            else:
+                previous = n
         else:
-            previous = n
+            n = previous
+            i = i - 1
         # fuse tens onto digits, eg. "twenty", "one" -> 21
         if n in tens_map and l and digits_map.get(l[-1], 0) != 0:
             d = l.pop()
@@ -163,12 +171,13 @@ alt_teens = "(" + ("|".join(teens_map.keys())) + ")"
 alt_tens = "(" + ("|".join(tens_map.keys())) + ")"
 alt_scales = "(" + ("|".join(scales_map.keys())) + ")"
 number_word = "(" + "|".join(numbers_map.keys()) + ")"
+alt_multiplier = "(" + ("|".join(multiplier_map.keys())) + ")"
 
 # TODO: allow things like "double eight" for 88
-@ctx.capture("digit_string", rule=f"({alt_digits} [do] | {alt_teens} | {alt_tens})+")
+@ctx.capture("digit_string", rule=f"({alt_digits} [{alt_multiplier}] | {alt_teens} | {alt_tens})+")
 def digit_string(m) -> str: return parse_number(list(m))
 
-@mod.capture(rule=f"({alt_one_through_nine} [do] | {alt_teens} | {alt_tens}) ({alt_digits} [do] | {alt_teens} | {alt_tens})*")
+@mod.capture(rule=f"({alt_one_through_nine} [{alt_multiplier}] | {alt_teens} | {alt_tens}) ({alt_digits} [{alt_multiplier}] | {alt_teens} | {alt_tens})*")
 def positive_digit_string(m) -> str: return parse_number(list(m))
 
 @mod.capture(rule="<user.positive_digit_string> | zero")
@@ -180,7 +189,7 @@ def digits(m) -> int:
     """Parses a phrase representing a digit sequence, returning it as an integer."""
     return int(m.digit_string)
 
-@mod.capture(rule=f"({number_word} | {alt_digits} do)+")
+@mod.capture(rule=f"({number_word} | {alt_digits} {alt_multiplier})+")
 def number_string(m) -> str:
     """Parses a number phrase, returning that number as a string."""
     return parse_number(list(m))
@@ -196,6 +205,31 @@ def number_signed(m):
     return -number if (m[0] in ["negative", "minus"]) else number
 
 @ctx.capture(
-    "number_small", rule=f"(zero | {alt_one_through_nine} | {alt_teens} | {alt_tens} [{alt_one_through_nine}] | [one] hundred)"
+    "number_small", rule=f"(zero | {alt_one_through_nine} | {alt_teens} | {alt_tens} [{alt_one_through_nine}] | (one | a) hundred)"
 )
 def number_small(m): return int(parse_number(list(m)))
+
+small_unit = f"({alt_teens} | {alt_tens} [{alt_one_through_nine}])"
+medium_unit = f"({alt_digits} | {small_unit}* (({alt_teens} | {alt_tens} {alt_one_through_nine}) {alt_digits} | {alt_tens} (zero | oh)))"
+absolute_unit = f"(({medium_unit} (dupe | quad))* {medium_unit} [trip | quint])"
+another_unit = f"({small_unit} | {medium_unit} (dupe | quad))"
+
+@mod.capture(rule=f"({absolute_unit} {absolute_unit})+ {another_unit}* | {another_unit}+")
+def number_even_length(m) -> str:
+    return parse_number(m)
+
+@mod.capture(rule=f"{absolute_unit} ({absolute_unit} {absolute_unit})* {another_unit}*")
+def number_odd_length(m) -> str:
+    return parse_number(m)
+
+medium_unit_not_zero = f"({alt_one_through_nine} | {small_unit}* (({alt_teens} | {alt_tens} {alt_one_through_nine}) {alt_digits} | {alt_tens} (zero | oh)))"
+absolute_unit_not_zero = f"(({medium_unit_not_zero} (dupe | quad))+ {medium_unit} [trip | quint] | {medium_unit_not_zero} [trip | quint])"
+another_unit_not_zero = f"({small_unit} | {medium_unit_not_zero} (dupe | quad))"
+
+@mod.capture(rule=f"{absolute_unit_not_zero} {absolute_unit} ({absolute_unit} {absolute_unit})* {another_unit}* | {another_unit_not_zero} {another_unit}*")
+def number_even_length_not_zero(m) -> str:
+    return parse_number(m)
+
+@mod.capture(rule=f"zero | {absolute_unit_not_zero} ({absolute_unit} {absolute_unit})* {another_unit}*")
+def number_odd_length_not_zero(m) -> str:
+    return parse_number(m)

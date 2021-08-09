@@ -1,4 +1,4 @@
-from typing import Set
+from typing import Set, List
 
 from talon import Module, Context, actions, app
 import sys
@@ -53,11 +53,21 @@ def arrow_key(m) -> str:
     "One directional arrow key"
     return m.arrow_key
 
+def parse_arrow_keys(m: List[str]) -> str:
+    result = []
+    multiplier = 1
+    for x in m:
+        if x in ctx.lists["self.arrow_key"]:
+            for i in range(multiplier):
+                result.append(x)
+        else:
+            multiplier = x
+    return " ".join(result)
 
-@mod.capture(rule="<self.arrow_key>+")
+@mod.capture(rule="([<number_small>] <self.arrow_key>)+")
 def arrow_keys(m) -> str:
     "One or more arrow keys separated by a space"
-    return str(m)
+    return parse_arrow_keys(list(m))
 
 
 @mod.capture(rule="{self.number_key}")
