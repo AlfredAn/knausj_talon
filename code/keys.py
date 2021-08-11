@@ -60,6 +60,7 @@ def parse_arrow_keys(m: List[str]) -> str:
         if x in ctx.lists["self.arrow_key"]:
             for i in range(multiplier):
                 result.append(x)
+            multiplier = 1
         else:
             multiplier = x
     return " ".join(result)
