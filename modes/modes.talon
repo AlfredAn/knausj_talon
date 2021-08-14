@@ -6,6 +6,7 @@ and not mode: swedish
     mode.disable("command")
     mode.disable("user.pop")
     mode.disable("user.chess")
+    mode.disable("user.civ5")
     mode.enable("dictation")
     user.code_clear_language_mode()
     mode.disable("user.gdb")
@@ -14,4 +15,5 @@ and not mode: swedish
     mode.disable("dictation")
     mode.disable("user.pop")
     mode.disable("user.chess")
+    mode.disable("user.civ5")
     mode.enable("command")

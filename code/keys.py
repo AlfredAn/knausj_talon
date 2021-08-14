@@ -115,10 +115,10 @@ def unmodified_key(m) -> str:
     "A single key with no modifiers"
     return str(m)
 
-@mod.capture(rule="[{self.modifiers}] <self.unmodified_key>")
+@mod.capture(rule="[<self.modifiers>] <self.unmodified_key>")
 def key(m) -> str:
     "A single key with optional modifiers"
-    return "-".join(m.modifiers + [m.unmodified_key])
+    return str(m).replace(" ", "-")
 
 
 @mod.capture(rule="<self.key>+")

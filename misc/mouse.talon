@@ -1,8 +1,17 @@
+mode: command
+mode: user.civ5
+-
 control mouse: user.mouse_toggle_control_mouse()
 zoom mouse: user.mouse_toggle_zoom_mouse()
 camera overlay: user.mouse_toggle_camera_overlay()
 run calibration: user.mouse_calibrate()	
-touch: 
+
+[zoom] click on: user.zoom_mouse_click_always()
+[zoom] click off: user.zoom_mouse_click_never()
+[zoom] click once: user.zoom_mouse_click_once()
+[zoom] click skip: user.zoom_mouse_click_after_first()
+
+touch:
 	mouse_click(0)
 	# close the mouse grid if open
 	user.grid_close()

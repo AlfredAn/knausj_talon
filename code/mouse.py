@@ -104,6 +104,22 @@ def gui_wheel(gui: imgui.GUI):
 
 @mod.action_class
 class Actions:
+    def zoom_mouse_click_always():
+        """Zoom mouse always clicks"""
+        eye_zoom_mouse.set_click_mode(0)
+    
+    def zoom_mouse_click_never():
+        """Zoom mouse never clicks"""
+        eye_zoom_mouse.set_click_mode(1)
+    
+    def zoom_mouse_click_once():
+        """Zoom mouse clicks just once"""
+        eye_zoom_mouse.set_click_mode(2)
+    
+    def zoom_mouse_click_after_first():
+        """Zoom mouse doesn't click the first time but then always after that"""
+        eye_zoom_mouse.set_click_mode(3)
+    
     def mouse_show_cursor():
         """Shows the cursor"""
         show_cursor_helper(True)
