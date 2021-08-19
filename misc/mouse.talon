@@ -11,6 +11,8 @@ run calibration: user.mouse_calibrate()
 [zoom] click once: user.zoom_mouse_click_once()
 [zoom] click skip: user.zoom_mouse_click_after_first()
 
+cancel zoom: user.mouse_cancel_zoom_mouse()
+
 touch:
 	mouse_click(0)
 	# close the mouse grid if open
@@ -81,6 +83,10 @@ wheel tiny [down] here:
 [wheel] downer here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_down_continuous()
+south: user.mouse_scroll_down_continuous(5)
+south here:
+    user.mouse_move_center_active_window()
+    user.mouse_scroll_down_continuous(5)
 wheel up: user.mouse_scroll_up()
 wheel up here:
  user.mouse_scroll_up()
@@ -92,6 +98,10 @@ wheel tiny up here:
 [wheel] upper here:
     user.mouse_move_center_active_window()
     user.mouse_scroll_up_continuous()
+north: user.mouse_scroll_up_continuous(5)
+north here:
+    user.mouse_move_center_active_window()
+    user.mouse_scroll_up_continuous(5)
 wheel gaze: user.mouse_gaze_scroll()
 wheel gaze here:
     user.mouse_move_center_active_window()

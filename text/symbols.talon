@@ -15,17 +15,17 @@ dub arrow: "=>"
 new line: "\\n"
 carriage return: "\\r"
 line feed: "\\r\\n"
-empty dubstring:
+empty (string | dubstring):
     '""'
     key(left)
-empty escaped (dubstring|dub quotes):
+empty escaped (dubstring | [dub] quotes | string):
     '\\"\\"'
     key(left)
     key(left)
-empty string:
+empty (single | sing) string:
     "''"
     key(left)
-empty escaped string:
+empty escaped (single | sing) string:
     "\\'\\'"
     key(left)
     key(left)

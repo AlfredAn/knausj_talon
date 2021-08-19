@@ -10,7 +10,7 @@ channel <user.text>:
 channel up: user.messaging_channel_previous()
 channel down: user.messaging_channel_next()
 ([channel] unread last | gopreev): user.messaging_unread_previous()
-([channel] unread next | goneck | neck): user.messaging_unread_next()
+([channel] [unread] next | goneck | neck | nex): user.messaging_unread_next()
 go (find | search): user.messaging_open_search()
 mark (all | workspace | server) read: user.messaging_mark_workspace_read()
 mark channel read: user.messaging_mark_channel_read()

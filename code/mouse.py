@@ -24,6 +24,7 @@ scroll_job = None
 gaze_job = None
 cancel_scroll_on_pop = True
 control_mouse_forced = False
+zoom_mouse_paused = False
 
 default_cursor = {
     "AppStarting": r"%SystemRoot%\Cursors\aero_working.ani",
@@ -150,6 +151,10 @@ class Actions:
     def mouse_toggle_zoom_mouse():
         """Toggles zoom mouse"""
         eye_zoom_mouse.toggle_zoom_mouse(not eye_zoom_mouse.zoom_mouse.enabled)
+    
+    def mouse_set_zoom_mouse(enabled: bool):
+        """Toggles zoom mouse"""
+        eye_zoom_mouse.toggle_zoom_mouse(enabled)
 
     def mouse_cancel_zoom_mouse():
         """Cancel zoom mouse if pending"""
@@ -158,7 +163,7 @@ class Actions:
             and eye_zoom_mouse.zoom_mouse.state != eye_zoom_mouse.STATE_IDLE
         ):
             eye_zoom_mouse.zoom_mouse.cancel()
-
+    
     def mouse_trigger_zoom_mouse():
         """Trigger zoom mouse if enabled"""
         if eye_zoom_mouse.zoom_mouse.enabled:
@@ -171,6 +176,8 @@ class Actions:
 
         # Start drag
         ctrl.mouse_click(button=button, down=True)
+        
+        actions.user.mouse_cancel_zoom_mouse()
 
     def mouse_drag_end():
         """ Releases any held mouse buttons """
@@ -194,11 +201,12 @@ class Actions:
         """Scrolls down"""
         mouse_scroll(setting_mouse_wheel_down_amount.get())()
 
-    def mouse_scroll_down_continuous():
+    def mouse_scroll_down_continuous(multiplier: int = 1):
         """Scrolls down continuously"""
         global continuous_scoll_mode
         continuous_scoll_mode = "scroll down continuous"
-        mouse_scroll(setting_mouse_continuous_scroll_amount.get())()
+        mouse_scroll(setting_mouse_continuous_scroll_amount.get() * multiplier)()
+        actions.user.mouse_cancel_zoom_mouse()
 
         if scroll_job is None:
             start_scroll()
@@ -210,11 +218,12 @@ class Actions:
         """Scrolls up"""
         mouse_scroll(-setting_mouse_wheel_down_amount.get())()
 
-    def mouse_scroll_up_continuous():
+    def mouse_scroll_up_continuous(multiplier: int = 1):
         """Scrolls up continuously"""
         global continuous_scoll_mode
         continuous_scoll_mode = "scroll up continuous"
-        mouse_scroll(-setting_mouse_continuous_scroll_amount.get())()
+        mouse_scroll(-setting_mouse_continuous_scroll_amount.get() * multiplier)()
+        actions.user.mouse_cancel_zoom_mouse()
 
         if scroll_job is None:
             start_scroll()
@@ -229,6 +238,7 @@ class Actions:
         """Starts gaze scroll"""
         global continuous_scoll_mode
         continuous_scoll_mode = "gaze scroll"
+        actions.user.mouse_cancel_zoom_mouse()
 
         start_cursor_scrolling()
         if setting_mouse_hide_mouse_gui.get() == 0:
@@ -302,6 +312,8 @@ def on_pop(active):
     elif actions.speech.enabled() and not eye_zoom_mouse.zoom_mouse.enabled:
         ctrl.mouse_click(button=0, hold=16000)
         actions.user.grid_close()
+    else:
+        actions.user.mouse_trigger_zoom_mouse()
 
 noise.register("pop", on_pop)
 
