@@ -260,6 +260,9 @@ class Actions:
         rect = ui.active_window().rect
         ctrl.mouse_move(rect.left + (rect.width / 2), rect.top + (rect.height / 2))
 
+    def auto_click():
+        """start clicking every 100ms. pop to stop"""
+        start_auto_click()
 
 def show_cursor_helper(show):
     """Show/hide the cursor"""
@@ -302,6 +305,8 @@ def on_pop(active):
         ctrl.mouse_click(button=0, up=True)
     elif setting_mouse_enable_pop_stops_scroll.get() >= 1 and (gaze_job or scroll_job):
         stop_scroll()
+    elif click_job and actions.speech.enabled():
+        stop_click()
     elif (
         not eye_zoom_mouse.zoom_mouse.enabled
         and eye_mouse.mouse.attached_tracker is not None
@@ -345,6 +350,19 @@ def start_scroll():
     # if eye_zoom_mouse.zoom_mouse.enabled and eye_mouse.mouse.attached_tracker is not None:
     #    eye_zoom_mouse.zoom_mouse.sleep(True)
 
+def click_continuous_helper():
+    ctrl.mouse_click(button=0, hold=16000)
+
+def start_auto_click():
+    global click_job
+    if click_job is None:
+        click_job = cron.interval("100ms", click_continuous_helper)
+
+def stop_click():
+    global click_job
+    if click_job:
+        cron.cancel(click_job)
+    click_job = None
 
 def gaze_scroll():
     # print("gaze_scroll")

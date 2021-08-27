@@ -1,7 +1,7 @@
 #defines the commands that sleep/wake Talon
 not mode: swedish
 -
-sleep+ yes*$:
+sleep [<phrase>]$:
     user.switcher_hide_running()
     user.history_disable()
     user.homophones_hide()

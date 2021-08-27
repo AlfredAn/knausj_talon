@@ -2,14 +2,20 @@ mode: command
 mode: user.civ5
 -
 control mouse: user.mouse_toggle_control_mouse()
-zoom mouse: user.mouse_toggle_zoom_mouse()
+zoom (mouse | stop): user.mouse_toggle_zoom_mouse()
+zoom click:
+	user.mouse_toggle_zoom_mouse()
+	user.zoom_mouse_click_always()
+zoom no click:
+	user.mouse_toggle_zoom_mouse()
+	user.zoom_mouse_click_never()
 camera overlay: user.mouse_toggle_camera_overlay()
 run calibration: user.mouse_calibrate()	
 
-[zoom] click on: user.zoom_mouse_click_always()
-[zoom] click off: user.zoom_mouse_click_never()
-[zoom] click once: user.zoom_mouse_click_once()
-[zoom] click skip: user.zoom_mouse_click_after_first()
+click on: user.zoom_mouse_click_always()
+click off: user.zoom_mouse_click_never()
+click once: user.zoom_mouse_click_once()
+click skip: user.zoom_mouse_click_after_first()
 
 cancel zoom: user.mouse_cancel_zoom_mouse()
 
@@ -29,6 +35,10 @@ righty:
 midclick: 
 	mouse_click(2)
 	# close the mouse grid
+	user.grid_close()
+
+auto click:
+	user.auto_click()
 	user.grid_close()
 
 #see keys.py for modifiers.

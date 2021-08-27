@@ -25,8 +25,7 @@ def on_phrase(j):
         val = parse_phrase(j["phrase"])
 
     if val != "":
-        history.append(val)
-        history = history[-setting_command_history_size.get() :]
+        actions.user.history_append(val)
 
 
 # todo: dynamic rect?
@@ -43,7 +42,6 @@ def gui(gui: imgui.GUI):
 
 
 speech_system.register("phrase", on_phrase)
-
 
 @mod.action_class
 class Actions:
@@ -81,3 +79,10 @@ class Actions:
         """returns the history entry at the specified index"""
         num = (0 - number) - 1
         return history[num]
+    
+    def history_append(s: str):
+        """append the given string to the command history"""
+        global history
+
+        history.append(s)
+        history = history[-setting_command_history_size.get() :]
