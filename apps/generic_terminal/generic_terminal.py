@@ -2,6 +2,8 @@ from talon import app, Module, Context, actions, ui, imgui, settings, app, regis
 
 mod = Module()
 
+mod.tag("generic_terminal", "generic terminal")
+
 @mod.action_class
 class Actions:
     # implements the function from generic_terminal.talon for unix shells
