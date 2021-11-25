@@ -44,10 +44,10 @@ inside angles:
 inside percent:
 	insert("%%")
 	key(left)
-inside (quotes | string):
+inside (single quotes | single string):
 	insert("''")
 	key(left)
-inside (double quotes | dubquotes):
+inside (quotes | string):
     insert('""')
 	key(left)
 inside (graves | back ticks):

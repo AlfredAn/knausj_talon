@@ -9,8 +9,4 @@ sleep [<phrase>]$:
     user.mouse_sleep()
     speech.disable()
 
-^(wake up)+$: speech.enable()
-
-^(wake up)+ <user.keys>$:
-    speech.enable()
-    key(keys)
+^wake up$: speech.enable()

@@ -6,7 +6,7 @@ zoom (mouse | stop): user.mouse_toggle_zoom_mouse()
 zoom click:
 	user.mouse_toggle_zoom_mouse()
 	user.zoom_mouse_click_always()
-zoom no click:
+zoom hover:
 	user.mouse_toggle_zoom_mouse()
 	user.zoom_mouse_click_never()
 camera overlay: user.mouse_toggle_camera_overlay()
