@@ -9,3 +9,8 @@ tag(): user.git
 tag(): user.kubectl
 
 ^go <user.letter>$: user.file_manager_open_volume("/mnt/{letter}")
+
+#make: insert("make ")
+#c make: insert("cmake ")
+sudo: insert("sudo ")
+apt install: insert("apt install ")

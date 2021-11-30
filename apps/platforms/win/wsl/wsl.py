@@ -12,10 +12,11 @@ mod = Module()
 # the current distro, and a way for the user to specify which distro to use
 # for any particular operation. perhaps implement a generic_wsl module and
 # then layer various distros on top of that?
-mod.apps.ubuntu = """
-os: windows
-and app.name: ubuntu.exe
-"""
+#mod.apps.ubuntu = """
+#os: windows
+#and app.name: ubuntu.exe
+#"""
+mod.apps.ubuntu = "win.title: /rygno@/"
 
 ctx = Context()
 ctx.matches = r"""
