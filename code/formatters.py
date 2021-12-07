@@ -102,12 +102,11 @@ def every_word(word_func):
 
     return formatter_function
 
-
 formatters_dict = {
     "NOOP": (SEP, lambda i, word, _: word),
     "DOUBLE_UNDERSCORE": (NOSEP, first_vs_rest(lambda w: "__%s__" % w)),
     "PRIVATE_CAMEL_CASE": (NOSEP, first_vs_rest(lambda w: w, lambda w: w.capitalize())),
-    "PROTECTED_CAMEL_CASE": (
+    "PROTECTED_CAMEL_CASE": (   
         NOSEP,
         first_vs_rest(lambda w: w, lambda w: w.capitalize()),
     ),
@@ -123,7 +122,8 @@ formatters_dict = {
         first_vs_rest(lambda w: " --" + w.lower(), lambda w: "-" + w.lower()),
     ),
     "DOUBLE_COLON_SEPARATED": words_with_joiner("::"),
-    "ALL_CAPS": (SEP, every_word(lambda w: w.upper())),
+    "ALL_CAPS": (SEP, every_word(lambda w: w.upper())), 
+    "CAPS_SNAKE": (NOSEP, first_vs_rest(lambda w: w.upper(), lambda w: "_" + w.upper())),
     "ALL_LOWERCASE": (SEP, every_word(lambda w: w.lower())),
     "DOUBLE_QUOTED_STRING": (SEP, surround('"')),
     "SINGLE_QUOTED_STRING": (SEP, surround("'")),
@@ -146,6 +146,7 @@ formatters_dict = {
 # This is the mapping from spoken phrases to formatters
 formatters_words = {
     "allcaps": formatters_dict["ALL_CAPS"],
+    "capsnake": formatters_dict["CAPS_SNAKE"],
     "alldown": formatters_dict["ALL_LOWERCASE"],
     "camel": formatters_dict["PRIVATE_CAMEL_CASE"],
     "dotted": formatters_dict["DOT_SEPARATED"],

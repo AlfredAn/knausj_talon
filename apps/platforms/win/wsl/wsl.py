@@ -16,7 +16,11 @@ mod = Module()
 #os: windows
 #and app.name: ubuntu.exe
 #"""
-mod.apps.ubuntu = "win.title: /rygno@/"
+mod.apps.ubuntu = r"""
+win.title: /rygno@/
+win.title: /pi@/
+win.title: /Ubuntu Server/
+"""
 
 ctx = Context()
 ctx.matches = r"""

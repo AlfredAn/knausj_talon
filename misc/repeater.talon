@@ -1,5 +1,6 @@
-reap <number_small>: core.repeat_command(number_small)
-dupe | twice: core.repeat_command(1)
+<number_small> times: core.repeat_command(number_small-1)
+^<number_small> more: core.repeat_command(number_small)
+dupe: core.repeat_command(1)
 trip: core.repeat_command(2)
 quad: core.repeat_command(3)
 quint: core.repeat_command(4)

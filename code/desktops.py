@@ -20,6 +20,10 @@ class Actions:
         """move to previous desktop"""
         app.notify("Not supported on this operating system")
 
+    def desktop_last_used():
+        """move to the last used desktop"""
+        app.notify("Not supported on this operating system")
+
     def window_move_desktop_left():
         """move the current window to the desktop to the left"""
         app.notify("Not supported on this operating system")

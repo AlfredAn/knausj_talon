@@ -10,7 +10,7 @@ tag(): user.code_comment
 # Do not enable this tag with dragon, as it will be unusable.
 # with conformer, the latency increase may also be unacceptable depending on your cpu
 # see https://github.com/knausj85/knausj_talon/issues/600
-# tag(): user.talon_populate_lists
+tag(): user.talon_populate_lists
 
 dot talon: insert(".talon")
 #defintion blocks for the context
@@ -64,3 +64,6 @@ funk wrap <user.code_functions>:
     user.code_insert_function(code_functions, edit.selected_text())
 funk wrap <number>:
     user.code_select_function(number - 1, edit.selected_text())
+
+map command <user.text>:
+    insert("{text}: insert(\"{text} \")")
