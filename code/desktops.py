@@ -24,6 +24,14 @@ class Actions:
         """move to the last used desktop"""
         app.notify("Not supported on this operating system")
 
+    def desktop_new():
+        """create a new desktop"""
+        app.notify("Not supported on this operating system")
+
+    def desktop_remove():
+        """remove the current desktop"""
+        app.notify("Not supported on this operating system")
+
     def window_move_desktop_left():
         """move the current window to the desktop to the left"""
         app.notify("Not supported on this operating system")
@@ -35,3 +43,4 @@ class Actions:
     def window_move_desktop(desktop_number: int):
         """move the current window to a different desktop"""
         app.notify("Not supported on this operating system")
+

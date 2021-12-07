@@ -9,6 +9,9 @@ class Actions:
     def desktop(number: int):
         actions.key(f"f{number+12}")
 
+    def desktop_show():
+        actions.key("super-tab")
+
     def desktop_next():
         actions.key("f22")
 
@@ -18,14 +21,17 @@ class Actions:
     def desktop_last_used():
         actions.key("f24")
 
-    def desktop_show():
-        actions.key("super-tab")
+    def desktop_new():
+        actions.key("super-ctrl-d")
+
+    def desktop_remove():
+        actions.key("super-ctrl-f4")
 
     def window_move_desktop_left():
-        actions.key("+f23")
+        actions.key("shift-f23")
 
     def window_move_desktop_right():
-        actions.key("+f22")
+        actions.key("shift-f22")
 
     def window_move_desktop(desktop_number: int):
-        actions.key(f"+f{desktop_number+12}")
+        actions.key(f"shift-f{desktop_number+12}")
