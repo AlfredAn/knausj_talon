@@ -16,3 +16,7 @@ snap <user.running_applications> <user.window_snap_position>:
     user.snap_app(running_applications, window_snap_position)
 snap <user.running_applications> [screen] <number>:
     user.move_app_to_screen(running_applications, number)
+
+launch cura [arachne]: user.switcher_launch("C:\\Program Files\\Ultimaker Cura Arachne_engine_beta_2 99.10.0\\Cura.exe")
+launch vscode: user.switcher_launch("C:\\Users\\Alfred\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe")
+launch cadquery [editor]: user.switcher_launch("C:\\Users\\Alfred\\programs\\CQ-editor-Windows\\CQ-editor\\CQ-editor.exe")

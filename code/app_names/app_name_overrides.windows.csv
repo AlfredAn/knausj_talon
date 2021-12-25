@@ -6,7 +6,7 @@ app, slack.exe
 lockapp, slack.exe
 pycharm, pycharm64.exe
 webstorm, webstorm64.exe
-vscode, Visual Studio Code
+vscode, Code.exe
 command prompt, cmd.exe
 command, cmd.exe
 task manager, Taskmgr.exe

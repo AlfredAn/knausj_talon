@@ -7,7 +7,10 @@ os: windows
 @ctx.action_class("user")
 class Actions:
     def desktop(number: int):
-        actions.key(f"f{number+12}")
+        if number in range(1, 10):
+            actions.key(f"f{number+12}")
+        else:
+            print(f"{number} is not a valid desktop")
 
     def desktop_show():
         actions.key("super-tab")
@@ -34,4 +37,7 @@ class Actions:
         actions.key("shift-f22")
 
     def window_move_desktop(desktop_number: int):
-        actions.key(f"shift-f{desktop_number+12}")
+        if desktop_number in range(1, 10):
+            actions.key(f"shift-f{desktop_number+12}")
+        else:
+            print(f"{desktop_number} is not a valid desktop")

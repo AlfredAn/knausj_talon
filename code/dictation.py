@@ -20,18 +20,23 @@ def word(m) -> str:
     except AttributeError:
         return " ".join(actions.dictate.replace_words(actions.dictate.parse_words(m.word)))
 
-@mod.capture(rule="({user.vocabulary} | <phrase>)+")
+@mod.capture(rule="({user.vocabulary} | <user.prose_letters> | <phrase>)+")
 def text(m) -> str:
     """A sequence of words, including user-defined vocabulary."""
     return format_phrase(m)
 
-@mod.capture(rule="({user.vocabulary} | {user.punctuation} | <phrase>)+")
+@mod.capture(rule="letter <user.letter> | letters <user.letter> (<user.letter>)+")
+def prose_letters(m) -> str:
+    """a sequence of letters inserted into dictation"""
+    return "".join(m[1:]).upper()
+
+@mod.capture(rule="({user.vocabulary} | {user.punctuation} | <user.prose_letters> | <phrase>)+")
 def prose(m) -> str:
     """Mixed words and punctuation, auto-spaced & capitalized."""
     text, _state = auto_capitalize(format_phrase(m))
     return text
 
-
+
 # ---------- FORMATTING ---------- #
 def format_phrase(m):
     words = capture_to_words(m)

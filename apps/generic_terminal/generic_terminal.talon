@@ -21,4 +21,3 @@ copy paste:
 
 pip: insert("pip ")
 pip install: insert("pip install ")
-flask: insert("flask ")
