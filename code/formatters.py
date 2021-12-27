@@ -160,7 +160,7 @@ formatters_words = {
     "slasher": formatters_dict["SLASH_SEPARATED"],
     "smash": formatters_dict["NO_SPACES"],
     "snake": formatters_dict["SNAKE_CASE"],
-    "single string": formatters_dict["SINGLE_QUOTED_STRING"],
+    "piestring": formatters_dict["SINGLE_QUOTED_STRING"],
     "title": formatters_dict["CAPITALIZE_ALL_WORDS"],
 }
 

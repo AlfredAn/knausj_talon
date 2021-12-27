@@ -12,9 +12,9 @@ do (mod | modulo): user.code_operator_modulo()
 # comparison operators
 is equal: user.code_operator_equal()
 is not equal: user.code_operator_not_equal()
-is greater [than]: user.code_operator_greater_than()
+is (greater | more) [than]: user.code_operator_greater_than()
 is less [than]: user.code_operator_less_than()
-is greater [than] or equal: user.code_operator_greater_than_or_equal_to()
+is (greater | more) [than] or equal: user.code_operator_greater_than_or_equal_to()
 is less [than] or equal: user.code_operator_less_than_or_equal_to()
 
 # logical operators
