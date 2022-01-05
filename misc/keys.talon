@@ -15,4 +15,3 @@ before <user.any_alphanumeric_key>:
     key("left")    
 jump: key(tab)
 all tab: key(alt-tab)
-co nair: key(ctrl-a)

@@ -1,3 +1,5 @@
+experiment: anchor-file
+
 mode: dictation
 and not mode: user.swedish
 -

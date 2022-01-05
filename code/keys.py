@@ -13,6 +13,8 @@ numbers = [str(i) for i in range(10)]
 default_f_digits = "one two three four five six seven eight nine ten eleven twelve".split(
     " "
 )
+ext_f_digits = "thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty".split(" ")
+ext_f_digits.extend(["twenty one", "twenty two", "twenty three", "twenty four"]) 
 
 mod = Module()
 mod.list("letter", desc="The spoken phonetic alphabet")
@@ -179,7 +181,7 @@ symbol_key_words = {
     "tilde": "~",
     "bang": "!",
     "underscore": "_",
-    "pear": "(",
+    "bear": "(",
     "apple": ")",
     "brace": "{",
     "nose": "}",
@@ -239,8 +241,10 @@ if app.platform in ("windows", "linux"):
 special_keys = {k: k for k in simple_keys}
 special_keys.update(alternate_keys)
 ctx.lists["self.special_key"] = special_keys
-ctx.lists["self.function_key"] = {
-    f"Fun {default_f_digits[i]}": f"f{i + 1}" for i in range(12)
-}
+
+fk = { f"fun {default_f_digits[i]}": f"f{i + 1}" for i in range(12) }
+fk.update({ f"funner {ext_f_digits[i]}": f"f{i + 13}" for i in range(12) })
+
+ctx.lists["self.function_key"] = fk
 
 

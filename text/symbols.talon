@@ -20,7 +20,7 @@ empty escaped pie string:
     "\\'\\'"
     key(left)
     key(left)
-inside pear:
+inside bears:
 	insert("()")
 	key(left)
 inside squares:
@@ -53,7 +53,7 @@ square that:
 brace that:
     text = edit.selected_text()
     user.paste("{{{text}}}")
-pear that:
+bear that:
     text = edit.selected_text()
     user.paste("({text})")
 percent that:

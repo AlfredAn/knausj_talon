@@ -17,3 +17,10 @@ and not mode: swedish
     mode.disable("user.chess")
     mode.disable("user.civ5")
     mode.enable("command")
+^mixed mode$:
+    mode.disable("sleep")
+    mode.disable("user.pop")
+    mode.disable("user.chess")
+    mode.disable("user.civ5")
+    mode.enable("command")
+    mode.enable("dictation")
