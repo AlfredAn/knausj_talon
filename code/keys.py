@@ -242,8 +242,8 @@ special_keys = {k: k for k in simple_keys}
 special_keys.update(alternate_keys)
 ctx.lists["self.special_key"] = special_keys
 
-fk = { f"fun {default_f_digits[i]}": f"f{i + 1}" for i in range(12) }
-fk.update({ f"funner {ext_f_digits[i]}": f"f{i + 13}" for i in range(12) })
+fk = { f"f {default_f_digits[i]}": f"f{i + 1}" for i in range(12) }
+fk.update({ f"fun {ext_f_digits[i]}": f"f{i + 13}" for i in range(12) })
 
 ctx.lists["self.function_key"] = fk
 
