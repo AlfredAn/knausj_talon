@@ -8,8 +8,6 @@ tag(): user.generic_unix_shell
 tag(): user.git
 tag(): user.kubectl
 
-^go <user.letter>$: user.file_manager_open_volume("/mnt/{letter}")
-
 sudo: insert("sudo ")
 apt: insert("apt ")
 apt install: insert("apt install ")
@@ -27,5 +25,13 @@ nano: insert("nano ")
 export flask app: insert("export FLASK_APP=")
 etcetera: insert("etc")
 nginx: insert("nginx ")
+docker: insert("docker ")
+systemctl: insert("systemctl ")
+systemctl status: insert("systemctl status ")
+systemctl start: insert("systemctl start ")
+systemctl stop: insert("systemctl stop ")
+systemctl enable: insert("systemctl enable ")
+systemctl disable: insert("systemctl disable ")
+my sequel: insert("mysql ")
 
 paste it: user.insert_clipboard()

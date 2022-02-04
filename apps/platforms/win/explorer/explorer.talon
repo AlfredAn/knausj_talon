@@ -2,7 +2,6 @@ app: windows_explorer
 app: windows_file_browser
 -
 tag(): user.file_manager
-^go <user.letter>$: user.file_manager_open_volume("{letter}:")
 go this pc:
     user.file_manager_open_volume("C:")
     sleep(250ms)

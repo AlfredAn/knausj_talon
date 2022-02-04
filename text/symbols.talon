@@ -1,5 +1,12 @@
 ellipsis: "..."
 spamma: ", "
+nanna:
+    ","
+    key(enter)
+spolon: ": "
+nolon:
+    ":"
+    key(enter)
 plus: "+"
 arrow: "->"
 dub arrow: "=>"
