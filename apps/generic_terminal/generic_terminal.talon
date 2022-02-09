@@ -27,3 +27,6 @@ pip install: insert("pip install ")
 (ssh | s s h | sage) octopi: insert("ssh pi ")
 (ssh | s s h | sage) server: insert("ssh server ")
 (ssh | s s h | sage) router: insert("ssh router ")
+
+python: insert("python ")
+python three: insert("python3 ")
