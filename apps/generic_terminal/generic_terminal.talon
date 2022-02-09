@@ -21,3 +21,9 @@ copy paste:
 
 pip: insert("pip ")
 pip install: insert("pip install ")
+
+(ssh | s s h | sage): insert("ssh ")
+(ssh | s s h | sage) pi: insert("ssh pi ")
+(ssh | s s h | sage) octopi: insert("ssh pi ")
+(ssh | s s h | sage) server: insert("ssh server ")
+(ssh | s s h | sage) router: insert("ssh router ")
