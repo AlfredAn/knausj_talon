@@ -22,11 +22,22 @@ copy paste:
 pip: insert("pip ")
 pip install: insert("pip install ")
 
-(ssh | s s h | sage): insert("ssh ")
-(ssh | s s h | sage) pi: insert("ssh pi ")
-(ssh | s s h | sage) octopi: insert("ssh pi ")
-(ssh | s s h | sage) server: insert("ssh server ")
-(ssh | s s h | sage) router: insert("ssh router ")
+sage: insert("ssh ")
+sage pi: insert("ssh pi ")
+sage pi two: insert("ssh pi2 ")
+sage server: insert("ssh server ")
+sage router: insert("ssh router ")
 
 python: insert("python ")
 python three: insert("python3 ")
+
+choco: insert("choco ")
+
+git: insert("git ")
+
+cargo: insert("cargo ")
+cargo build: insert("cargo build\n")
+cargo run: insert("cargo run\n")
+
+rustup: insert("rustup ")
+

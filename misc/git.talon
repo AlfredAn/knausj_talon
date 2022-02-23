@@ -2,6 +2,7 @@ tag: terminal
 and tag: user.git
 -
 # Standard commands
+git: "git "
 git add patch: "git add . -p\n"
 git add: "git add "
 git add everything: "git add -u\n"

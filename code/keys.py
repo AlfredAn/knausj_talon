@@ -231,7 +231,8 @@ alternate_keys = {
     "page up": "pageup",
     "page down": "pagedown",
     "home key": "home",
-    "end key": "end"
+    "end key": "end",
+    "jump": "tab"
 }
 # mac apparently doesn't have the menu key.
 if app.platform in ("windows", "linux"):

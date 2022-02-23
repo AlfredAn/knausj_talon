@@ -14,6 +14,7 @@ ctx.lists['user.code_libraries'] = {
     'file system': 'std::fs',
     'envy': 'std::env',
     'collections': 'std::collections',
+    'format': 'std::fmt',
 }
 ctx.lists['user.code_functions'] = {
     'drop': 'drop',
@@ -32,9 +33,10 @@ ctx.lists['user.code_type'] = {
     'eye sixty four': 'i64',
     'you size': 'usize',
     'eye size': 'isize',
+    'bool': 'bool',
     'boolean': 'bool',
     'string': 'str',
-    'owned strign': 'String',
+    'owned string': 'String',
 }
 
 @ctx.action_class('user')

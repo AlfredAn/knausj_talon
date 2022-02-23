@@ -53,6 +53,8 @@ state match: "match "
 state arrow: "-> "
 state dub arrow: "=> "
 state use: "use "
+state where: "where\n\t"
+state crate: "crate::"
 
 use <user.code_libraries>:
     user.code_insert_library(code_libraries, "")
