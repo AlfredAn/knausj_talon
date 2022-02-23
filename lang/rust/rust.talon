@@ -1,8 +1,4 @@
-mode: command
-and mode: user.rust
-mode: command
-and mode: user.auto_lang
-and code.language: rust
+tag: user.rust
 -
 tag(): user.code_imperative
 tag(): user.code_object_oriented
@@ -31,11 +27,11 @@ state unsafe: "unsafe "
 
 state struct <user.text>:
     insert("struct ")
-    insert(user.formatted_text(text, "hammer"))
+    insert(user.formatted_text(text, "PUBLIC_CAMEL_CASE"))
 
 state enum <user.text>:
     insert("enum ")
-    insert(user.formatted_text(text, "hammer"))
+    insert(user.formatted_text(text, "PUBLIC_CAMEL_CASE"))
 
 toggle use: user.code_toggle_libraries()
 
@@ -50,11 +46,12 @@ state ref mute: "ref mut "
 state ref: "ref "
 state trait: "trait "
 state match: "match "
-state arrow: "-> "
-state dub arrow: "=> "
 state use: "use "
 state where: "where\n\t"
 state crate: "crate::"
+state use: "use "
+op arrow: " -> "
+op dub arrow: " => "
 
 use <user.code_libraries>:
     user.code_insert_library(code_libraries, "")

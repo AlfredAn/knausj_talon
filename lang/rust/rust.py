@@ -3,11 +3,7 @@ from talon import Module, Context, actions, ui, imgui, settings
 mod = Module()
 
 ctx = Context()
-ctx.matches = r'''
-mode: user.rust
-mode: user.auto_lang
-and code.language: rust
-'''
+ctx.matches = 'tag: user.rust'
 
 ctx.lists['user.code_libraries'] = {
     'eye oh': 'std::io',
@@ -43,6 +39,8 @@ ctx.lists['user.code_type'] = {
 class UserActions:
     def code_operator_lambda():
         actions.insert('|| ')
+        actions.edit.left()
+        actions.edit.left()
 
     def code_operator_subscript():
         actions.insert('[]')
@@ -52,122 +50,122 @@ class UserActions:
         actions.insert(' += 1')
 
     def code_operator_indirection():
-        actions.auto_insert('*')
+        actions.auto('*')
 
     def code_operator_address_of():
-        actions.auto_insert('&')
+        actions.auto('&')
 
     def code_operator_assignment():
-        actions.auto_insert(' = ')
+        actions.auto(' = ')
 
     def code_operator_subtraction():
-        actions.auto_insert(' - ')
+        actions.auto(' - ')
 
     def code_operator_subtraction_assignment():
-        actions.auto_insert(' -= ')
+        actions.auto(' -= ')
 
     def code_operator_addition():
-        actions.auto_insert(' + ')
+        actions.auto(' + ')
 
     def code_operator_addition_assignment():
-        actions.auto_insert(' += ')
+        actions.auto(' += ')
 
     def code_operator_multiplication():
-        actions.auto_insert(' * ')
+        actions.auto(' * ')
 
     def code_operator_multiplication_assignment():
-        actions.auto_insert(' *= ')
+        actions.auto(' *= ')
 
     def code_operator_exponent():
-        actions.auto_insert('.pow()');
+        actions.auto('.pow()');
         actions.edit.left();
 
     def code_operator_division():
-        actions.auto_insert(' / ')
+        actions.auto(' / ')
 
     def code_operator_division_assignment():
-        actions.auto_insert(' /= ')
+        actions.auto(' /= ')
 
     def code_operator_modulo():
-        actions.auto_insert(' % ')
+        actions.auto(' % ')
 
     def code_operator_modulo_assignment():
-        actions.auto_insert(' %= ')
+        actions.auto(' %= ')
 
     def code_operator_equal():
-        actions.auto_insert(' == ')
+        actions.auto(' == ')
 
     def code_operator_not_equal():
-        actions.auto_insert(' != ')
+        actions.auto(' != ')
 
     def code_operator_greater_than():
-        actions.auto_insert(' > ')
+        actions.auto(' > ')
 
     def code_operator_greater_than_or_equal_to():
-        actions.auto_insert(' >= ')
+        actions.auto(' >= ')
 
     def code_operator_less_than():
-        actions.auto_insert(' < ')
+        actions.auto(' < ')
 
     def code_operator_less_than_or_equal_to():
-        actions.auto_insert(' <= ')
+        actions.auto(' <= ')
 
     def code_operator_and():
-        actions.auto_insert(' && ')
+        actions.auto(' && ')
 
     def code_operator_or():
-        actions.auto_insert(' || ')
+        actions.auto(' || ')
 
     def code_operator_bitwise_and():
-        actions.auto_insert(' & ')
+        actions.auto(' & ')
 
     def code_operator_bitwise_or():
-        actions.auto_insert(' | ')
+        actions.auto(' | ')
 
     def code_operator_bitwise_exclusive_or():
-        actions.auto_insert(' ^ ')
+        actions.auto(' ^ ')
 
     def code_operator_bitwise_left_shift():
-        actions.auto_insert(' << ')
+        actions.auto(' << ')
 
     def code_operator_bitwise_left_shift_assignment():
-        actions.auto_insert(' <<= ')
+        actions.auto(' <<= ')
 
     def code_operator_bitwise_right_shift():
-        actions.auto_insert(' >> ')
+        actions.auto(' >> ')
 
     def code_operator_bitwise_right_shift_assignment():
-        actions.auto_insert(' >>= ')
+        actions.auto(' >>= ')
 
     def code_operator_object_accessor():
-        actions.auto_insert('.')
+        actions.auto('.')
 
     def code_state_switch():
         actions.insert('match ')
 
     def code_block():
-        actions.auto_insert('{\n\n}')
+        actions.auto('{\n\n}')
         actions.edit.left()
         actions.edit.up()
         actions.key('tab')
 
     def code_import():
-        actions.auto_insert('use ')
+        actions.auto('use ')
 
     def code_comment_line_prefix():
-        actions.auto_insert('//')
+        actions.auto('//')
 
     def code_comment_documentation():
-        actions.auto_insert('/// ')
+        actions.auto('/// ')
 
     def code_self():
-        actions.auto_insert('self')
+        actions.auto('self')
 
     def code_insert_true():
-        actions.auto_insert('true')
+        actions.auto('true')
 
     def code_insert_false():
-        actions.auto_insert('false')
+        actions.auto('false')
 
     def code_state_if():
         actions.insert('if ')
