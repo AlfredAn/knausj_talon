@@ -50,122 +50,122 @@ class UserActions:
         actions.insert(' += 1')
 
     def code_operator_indirection():
-        actions.auto('*')
+        actions.auto_insert('*')
 
     def code_operator_address_of():
-        actions.auto('&')
+        actions.auto_insert('&')
 
     def code_operator_assignment():
-        actions.auto(' = ')
+        actions.auto_insert(' = ')
 
     def code_operator_subtraction():
-        actions.auto(' - ')
+        actions.auto_insert(' - ')
 
     def code_operator_subtraction_assignment():
-        actions.auto(' -= ')
+        actions.auto_insert(' -= ')
 
     def code_operator_addition():
-        actions.auto(' + ')
+        actions.auto_insert(' + ')
 
     def code_operator_addition_assignment():
-        actions.auto(' += ')
+        actions.auto_insert(' += ')
 
     def code_operator_multiplication():
-        actions.auto(' * ')
+        actions.auto_insert(' * ')
 
     def code_operator_multiplication_assignment():
-        actions.auto(' *= ')
+        actions.auto_insert(' *= ')
 
     def code_operator_exponent():
-        actions.auto('.pow()');
+        actions.auto_insert('.pow()');
         actions.edit.left();
 
     def code_operator_division():
-        actions.auto(' / ')
+        actions.auto_insert(' / ')
 
     def code_operator_division_assignment():
-        actions.auto(' /= ')
+        actions.auto_insert(' /= ')
 
     def code_operator_modulo():
-        actions.auto(' % ')
+        actions.auto_insert(' % ')
 
     def code_operator_modulo_assignment():
-        actions.auto(' %= ')
+        actions.auto_insert(' %= ')
 
     def code_operator_equal():
-        actions.auto(' == ')
+        actions.auto_insert(' == ')
 
     def code_operator_not_equal():
-        actions.auto(' != ')
+        actions.auto_insert(' != ')
 
     def code_operator_greater_than():
-        actions.auto(' > ')
+        actions.auto_insert(' > ')
 
     def code_operator_greater_than_or_equal_to():
-        actions.auto(' >= ')
+        actions.auto_insert(' >= ')
 
     def code_operator_less_than():
-        actions.auto(' < ')
+        actions.auto_insert(' < ')
 
     def code_operator_less_than_or_equal_to():
-        actions.auto(' <= ')
+        actions.auto_insert(' <= ')
 
     def code_operator_and():
-        actions.auto(' && ')
+        actions.auto_insert(' && ')
 
     def code_operator_or():
-        actions.auto(' || ')
+        actions.auto_insert(' || ')
 
     def code_operator_bitwise_and():
-        actions.auto(' & ')
+        actions.auto_insert(' & ')
 
     def code_operator_bitwise_or():
-        actions.auto(' | ')
+        actions.auto_insert(' | ')
 
     def code_operator_bitwise_exclusive_or():
-        actions.auto(' ^ ')
+        actions.auto_insert(' ^ ')
 
     def code_operator_bitwise_left_shift():
-        actions.auto(' << ')
+        actions.auto_insert(' << ')
 
     def code_operator_bitwise_left_shift_assignment():
-        actions.auto(' <<= ')
+        actions.auto_insert(' <<= ')
 
     def code_operator_bitwise_right_shift():
-        actions.auto(' >> ')
+        actions.auto_insert(' >> ')
 
     def code_operator_bitwise_right_shift_assignment():
-        actions.auto(' >>= ')
+        actions.auto_insert(' >>= ')
 
     def code_operator_object_accessor():
-        actions.auto('.')
+        actions.auto_insert('.')
 
     def code_state_switch():
         actions.insert('match ')
 
     def code_block():
-        actions.auto('{\n\n}')
+        actions.auto_insert('{\n\n}')
         actions.edit.left()
         actions.edit.up()
         actions.key('tab')
 
     def code_import():
-        actions.auto('use ')
+        actions.auto_insert('use ')
 
     def code_comment_line_prefix():
-        actions.auto('//')
+        actions.auto_insert('//')
 
     def code_comment_documentation():
-        actions.auto('/// ')
+        actions.auto_insert('/// ')
 
     def code_self():
-        actions.auto('self')
+        actions.auto_insert('self')
 
     def code_insert_true():
-        actions.auto('true')
+        actions.auto_insert('true')
 
     def code_insert_false():
-        actions.auto('false')
+        actions.auto_insert('false')
 
     def code_state_if():
         actions.insert('if ')
