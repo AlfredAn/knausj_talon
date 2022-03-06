@@ -51,6 +51,9 @@ inside quotes:
 inside (graves | back ticks):
 	insert("``")
 	key(left)
+inside pipes:
+    insert("||")
+    key(left)
 angle that:
     text = edit.selected_text()
     user.paste("<{text}>")
