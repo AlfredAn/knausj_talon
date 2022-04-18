@@ -23,6 +23,12 @@ settings():
     user.code_private_variable_formatter = "SNAKE_CASE"
     user.code_public_variable_formatter = "SNAKE_CASE"
 
+<user.rust_lifetime>:
+    user.insert_no_format("{rust_lifetime}")
+
+<user.rust_let>:
+    user.insert_no_format("{rust_let}")
+
 state unsafe: "unsafe "
 
 state struct <user.text>:
@@ -31,6 +37,10 @@ state struct <user.text>:
 
 state enum <user.text>:
     insert("enum ")
+    insert(user.formatted_text(text, "PUBLIC_CAMEL_CASE"))
+
+state trait <user.text>:
+    insert("trait ")
     insert(user.formatted_text(text, "PUBLIC_CAMEL_CASE"))
 
 toggle use: user.code_toggle_libraries()
@@ -47,12 +57,48 @@ state ref: "ref "
 state trait: "trait "
 state match: "match "
 state use: "use "
-state where: "where\n\t"
+state const: "const "
+state where: "where "
+state where slap: "where\n\t"
 state crate: "crate::"
-state use: "use "
-op arrow: " -> "
-op dub arrow: " => "
+state some:
+    "Some()"
+    key(left)
+state none: "None"
+
+do arrow: " -> "
+do dub arrow: " => "
+
+box that:
+    "("
+    key(left:2)
+    "Box::new"
+
+option that:
+    "<"
+    key(left:2)
+    "Option"
+
+some that:
+    "("
+    key(left:2)
+    "Some"
+
+(rc | r c | are see) that:
+    "("
+    key(left:2)
+    "Rc::new"
 
 use <user.code_libraries>:
     user.code_insert_library(code_libraries, "")
     key(semicolon enter)
+
+as {user.code_type}: insert(" as {code_type}")
+
+print display:
+    insert("println!(\"{}\", );")
+    key(left:2)
+
+print debug:
+    insert("println!(\"{{:?}}\", );")
+    key(left:2)

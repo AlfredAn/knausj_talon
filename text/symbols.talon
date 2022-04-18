@@ -42,7 +42,7 @@ inside angles:
 inside percent:
 	insert("%%")
 	key(left)
-inside pie quotes:
+inside primes:
 	insert("''")
 	key(left)
 inside quotes:
@@ -72,7 +72,7 @@ percent that:
 quote that:
     text = edit.selected_text()
     user.paste('"{text}"')
-pie quote that:
+prime that:
     text = edit.selected_text()
     user.paste("'{text}'")
 (grave | back tick) that:

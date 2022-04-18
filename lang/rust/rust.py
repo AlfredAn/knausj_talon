@@ -1,9 +1,77 @@
 from talon import Module, Context, actions, ui, imgui, settings
+from pprint import pprint
+from inspect import getmembers
+from types import FunctionType
 
 mod = Module()
 
 ctx = Context()
 ctx.matches = 'tag: user.rust'
+
+def attributes(obj):
+    return {
+      name: getattr(obj, name) for name in dir(obj) 
+        if hasattr(obj, name)}
+
+@mod.capture(rule=f"<user.letters> | <user.text>")
+def rust_identifier(m) -> str:
+    if hasattr(m, "letters"):
+        return m.letters
+    else:
+        return actions.user.formatted_text(m.text, "SNAKE_CASE")
+
+@mod.capture(rule=f"ref [<user.rust_lifetime>] [mute]")
+def rust_reference(m) -> str:
+    return str(m) \
+        .replace("mute", "mut") \
+        .replace("ref ", "&") \
+        .replace("ref", "&")
+
+@mod.capture(rule=f"[<user.rust_reference>] <user.rust_identifier>")
+def rust_variable(m) -> str:
+    if hasattr(m, "rust_reference"):
+        if m.rust_reference[-1] == "&":
+            return m.rust_reference + m.rust_identifier
+        else:
+            return m.rust_reference + " " + m.rust_identifier
+    else:
+        return str(m)
+
+@mod.capture(rule=f"life (<user.letter> | static | auto)")
+def rust_lifetime(m) -> str:
+    return "'" + (str(m[1]).replace("auto", "_"))
+
+d = {"mute": "mut", "be": "="}
+
+def s(x, d):
+    pprint(x)
+    if x[0] == x[1]:
+        return d.get(str(x[0]), str(x[0]))
+    else:
+        return str(x[0])
+
+@mod.capture(rule=f"let [mute] <user.rust_variable> [be]")
+def rust_let(m) -> str:
+    pprint(attributes(m))
+    m = " ".join(list(map(lambda x: s(x, d), zip(m, m._capture))))
+    if m[-1] == "=":
+        m += " "
+    return m
+
+@mod.action_class
+class UserActions:
+    def insert_no_format(s: str):
+        """don't format single quotes"""
+        s = s.split("'")
+        first = True
+        for t in s:
+            if not first:
+                actions.insert("a")
+                actions.key("left")
+                actions.insert("'")
+                actions.key("delete")
+            first = False
+            actions.insert(t)
 
 ctx.lists['user.code_libraries'] = {
     'eye oh': 'std::io',
@@ -33,6 +101,7 @@ ctx.lists['user.code_type'] = {
     'boolean': 'bool',
     'string': 'str',
     'owned string': 'String',
+    'self': 'Self',
 }
 
 @ctx.action_class('user')

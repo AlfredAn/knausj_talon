@@ -168,7 +168,7 @@ punctuation_words = {
 }
 symbol_key_words = {
     "point": ".",
-    "pie quote": "'",
+    "prime": "'",
     "apostrophe": "'",
     "square": "[",
     "rare": "]",
