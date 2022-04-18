@@ -215,7 +215,7 @@ def auto_capitalize(text, state = None):
     return output, ("sentence start" if charge or sentence_end else
                     "after newline" if newline else None)
 
-
+
 # ---------- DICTATION AUTO FORMATTING ---------- #
 class DictationFormat:
     def __init__(self):
@@ -342,10 +342,7 @@ class Actions:
         # so that future dictation is properly formatted.
         text = text.replace("“", "\"").replace("”", "\"")
         actions.user.add_phrase_to_history(text)
-        # we insert the text all at once in case we have an implementation of
-        # insert that is more efficient for long strings, eg. paste-to-insert
-        actions.insert(text + (" " if add_space_after else ""))
-        if add_space_after: actions.edit.left()
+        actions.user.insert_between(text, " " if add_space_after else "")
 
     def dictation_peek_left(clobber: bool = False) -> Optional[str]:
         """

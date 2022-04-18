@@ -10,6 +10,7 @@ and not mode: swedish
     mode.enable("dictation")
     user.code_clear_language_mode()
     mode.disable("user.gdb")
+
 ^command mode$:
     mode.disable("sleep")
     mode.disable("dictation")
@@ -17,6 +18,7 @@ and not mode: swedish
     mode.disable("user.chess")
     mode.disable("user.civ5")
     mode.enable("command")
+
 ^mixed mode$:
     mode.disable("sleep")
     mode.disable("user.pop")

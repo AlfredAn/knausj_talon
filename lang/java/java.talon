@@ -8,7 +8,6 @@ tag(): user.code_comment_block_c_like
 tag(): user.code_data_bool
 tag(): user.code_data_null
 tag(): user.code_functions
-tag(): user.code_functions_gui
 tag(): user.code_libraries
 tag(): user.code_operators_array
 tag(): user.code_operators_assignment
@@ -29,9 +28,7 @@ boxed [type] {user.java_boxed_type}:
     insert(user.java_boxed_type + " ")
 
 generic [type] {user.java_generic_data_structure}:
-    insert(java_generic_data_structure)
-    insert("<>")
-    key("left")
+    user.insert_between(java_generic_data_structure + "<", ">")
 
 # Arrays
 type {user.code_type} array:

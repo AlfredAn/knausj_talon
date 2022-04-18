@@ -8,5 +8,6 @@ sleep [<phrase>]$:
     user.help_hide()
     user.mouse_sleep()
     speech.disable()
+    user.engine_sleep()
 
 ^wake up$: speech.enable()
