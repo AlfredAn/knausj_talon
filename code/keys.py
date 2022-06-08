@@ -1,6 +1,6 @@
 from typing import Set, List
 
-from talon import Module, Context, actions, app
+from talon import Context, Module, actions, app
 import sys
 
 default_alphabet = "arm bat cap drum each fine gust harp spit jury crunch look made near orc pill quench red sing trap urge vest whale plex yank zip aurora antlion earth".split(
@@ -10,8 +10,8 @@ letters_string = "abcdefghijklmnopqrstuvwxyzåäö"
 
 default_digits = "zero one two three four five six seven eight nine".split(" ")
 numbers = [str(i) for i in range(10)]
-default_f_digits = "one two three four five six seven eight nine ten eleven twelve".split(
-    " "
+default_f_digits = (
+    "one two three four five six seven eight nine ten eleven twelve".split(" ")
 )
 ext_f_digits = "thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty".split(" ")
 ext_f_digits.extend(["twenty one", "twenty two", "twenty three", "twenty four"]) 
@@ -161,7 +161,6 @@ punctuation_words = {
     "at sign": "@",
     "and sign": "&",
     "ampersand": "&",
-
     # Currencies
     "dollar sign": "$",
     "pound sign": "£",
@@ -254,7 +253,7 @@ class Actions:
     def move_cursor(s: str):
         """Given a sequence of directions, eg. 'left left up', moves the cursor accordingly using edit.{left,right,up,down}."""
         for d in s.split():
-            if d in ('left','right','up','down'):
+            if d in ("left", "right", "up", "down"):
                 getattr(actions.edit, d)()
             else:
-                raise RuntimeError(f'invalid arrow key: {d}')
+                raise RuntimeError(f"invalid arrow key: {d}")
