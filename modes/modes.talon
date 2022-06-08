@@ -11,7 +11,7 @@ and not mode: swedish
     user.code_clear_language_mode()
     mode.disable("user.gdb")
 
-^command mode$:
+^(command | come on) mode$:
     mode.disable("sleep")
     mode.disable("dictation")
     mode.disable("user.pop")

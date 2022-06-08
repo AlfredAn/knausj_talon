@@ -32,7 +32,6 @@ tag(): terminal
 tag(): user.file_manager
 tag(): user.generic_unix_shell
 tag(): user.git
-tag(): user.kubectl
 
 ^go <user.letter>$: user.file_manager_open_volume("/mnt/{letter}")
 
@@ -51,7 +50,6 @@ python three: insert("python3 ")
 v env | venv: insert("venv")
 flask: insert("flask ")
 flask run: insert("flask run ")
-systemctl: insert("systemctl ")
 nano: insert("nano ")
 export flask app: insert("export FLASK_APP=")
 etcetera: insert("etc")

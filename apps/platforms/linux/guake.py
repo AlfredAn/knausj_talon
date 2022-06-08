@@ -4,7 +4,7 @@ ctx.matches = r"""
 os: linux
 app: Guake
 """
-ctx.tags = ['user.git', 'user.kubectl', 'user.tabs', 'terminal']
+ctx.tags = ['user.git', 'user.tabs', 'terminal']
 
 @ctx.action_class('app')
 class AppActions:

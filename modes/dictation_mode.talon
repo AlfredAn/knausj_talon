@@ -6,6 +6,14 @@ and not mode: user.swedish
 ^press <user.modifiers>$: key(modifiers)
 ^press <user.keys>$: key(keys)
 
+(command | come on) mode$:
+    mode.disable("sleep")
+    mode.disable("dictation")
+    mode.disable("user.pop")
+    mode.disable("user.chess")
+    mode.disable("user.civ5")
+    mode.enable("command")
+
 # Everything here should call `auto_insert()` (instead of `insert()`), to preserve the state to correctly auto-capitalize/auto-space.
 # (Talonscript string literals implicitly call `auto_insert`, so there's no need to wrap those)
 <user.raw_prose>: auto_insert(raw_prose)

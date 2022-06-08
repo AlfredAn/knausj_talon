@@ -1,5 +1,4 @@
 from talon import Module, Context, actions, settings
-from pprint import pprint
 from inspect import getmembers
 from types import FunctionType
 from typing import TypeVar, Callable, Any
@@ -10,6 +9,8 @@ mod.list('code_type_modifier', desc='List of type modifiers for active language'
 mod.list('code_macros', desc='List of macros for active language')
 mod.list('code_trait', desc='List of traits for active language')
 
+ctx = Context()
+ctx.matches = 'tag: user.rust'
 
 def attributes(obj):
     return {
@@ -47,7 +48,6 @@ def rust_lifetime(m) -> str:
 d = {"mute": "mut", "be": "="}
 
 def s(x, d):
-    pprint(x)
     if x[0] == x[1]:
         return d.get(str(x[0]), str(x[0]))
     else:
@@ -55,7 +55,6 @@ def s(x, d):
 
 @mod.capture(rule=f"let [mute] <user.rust_variable> [be]")
 def rust_let(m) -> str:
-    pprint(attributes(m))
     m = " ".join(list(map(lambda x: s(x, d), zip(m, m._capture))))
     if m[-1] == "=":
         m += " "
@@ -82,11 +81,6 @@ ctx.lists['user.code_libraries'] = {
     'envy': 'std::env',
     'collections': 'std::collections',
     'format': 'std::fmt',
-}
-ctx.lists['user.code_functions'] = {
-    'drop': 'drop',
-    'print line': 'println!',
-    'error line': 'eprintln!',
 }
 @mod.action_class
 class Actions:

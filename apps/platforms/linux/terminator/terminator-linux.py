@@ -20,7 +20,6 @@ ctx.tags = [
     'user.splits',
     'user.generic_unix_shell',
     'user.git',
-    'user.kubectl',
 ]
 
 

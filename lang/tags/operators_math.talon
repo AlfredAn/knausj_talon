@@ -7,7 +7,7 @@ do (plus | add): user.code_operator_addition()
 do (times | multiply): user.code_operator_multiplication()
 do divide: user.code_operator_division()
 do (mod | modulo): user.code_operator_modulo()
-(do (power | exponent) | to the power [of]): user.code_operator_exponent()
+(do exponent | to the power [of]): user.code_operator_exponent()
 
 # comparison operators
 is equal: user.code_operator_equal()

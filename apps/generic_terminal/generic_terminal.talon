@@ -39,6 +39,7 @@ git: insert("git ")
 cargo: insert("cargo ")
 cargo build: insert("cargo build\n")
 cargo run: insert("cargo run\n")
+cargo test: insert("cargo test\n")
 
 rustup: insert("rustup ")
 

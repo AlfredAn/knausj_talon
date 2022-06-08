@@ -17,6 +17,9 @@ click off: user.zoom_mouse_click_never()
 click once: user.zoom_mouse_click_once()
 click skip: user.zoom_mouse_click_after_first()
 
+yes click: user.click_on()
+no click: user.click_off()
+
 cancel zoom: user.mouse_cancel_zoom_mouse()
 
 touch:

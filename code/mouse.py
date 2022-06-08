@@ -23,6 +23,7 @@ gaze_job = None
 cancel_scroll_on_pop = True
 control_mouse_forced = False
 zoom_mouse_paused = False
+pop_to_click = True
 
 default_cursor = {
     "AppStarting": r"%SystemRoot%\Cursors\aero_working.ani",
@@ -112,6 +113,16 @@ def gui_wheel(gui: imgui.GUI):
 
 @mod.action_class
 class Actions:
+    def click_on():
+        """Pop to click"""
+        global pop_to_click
+        pop_to_click = True
+
+    def click_off():
+        """Pop to click"""
+        global pop_to_click
+        pop_to_click = False
+
     def zoom_mouse_click_always():
         """Zoom mouse always clicks"""
         eye_zoom_mouse.set_click_mode(0)
@@ -329,7 +340,7 @@ def on_pop(active):
         if setting_mouse_enable_pop_click.get() >= 1:
             ctrl.mouse_click(button=0, hold=16000)
     # pop to click even when not using eye tracking
-    elif actions.speech.enabled() and not eye_zoom_mouse.zoom_mouse.enabled:
+    elif pop_to_click and actions.speech.enabled() and not eye_zoom_mouse.zoom_mouse.enabled:
         ctrl.mouse_click(button=0, hold=16000)
         actions.user.grid_close()
     else:

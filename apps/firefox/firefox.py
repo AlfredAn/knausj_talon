@@ -35,3 +35,10 @@ class BrowserActions:
         actions.browser.focus_address()
     def submit_form():
         actions.key('enter')
+
+@ctx.action_class("edit")
+class EditActions:
+    def line_insert_down():
+        actions.sleep("50ms")
+        actions.edit.line_end()
+        actions.key("enter")
