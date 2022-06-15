@@ -322,6 +322,8 @@ def on_pop(active):
     button_down = len(list(ctrl.mouse_buttons_down())) > 0
     if button_down:
         ctrl.mouse_click(button=0, up=True)
+        ctrl.mouse_click(button=1, up=True)
+        ctrl.mouse_click(button=2, up=True)
     elif setting_mouse_enable_pop_stops_scroll.get() >= 1 and (gaze_job or scroll_job):
         stop_scroll()
     elif click_job and actions.speech.enabled():

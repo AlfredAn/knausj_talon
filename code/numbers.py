@@ -228,6 +228,12 @@ def number_signed(m):
 def number_small(m):
     return int(parse_number(list(m)))
 
+@mod.capture(
+    rule=f"({alt_one_through_nine} | {alt_teens} | {alt_tens} [{alt_one_through_nine}] | (one | a) hundred)"
+)
+def number_small_nonzero(m) -> int:
+    return int(parse_number(list(m)))
+
 small_unit = f"({alt_teens} | {alt_tens} [{alt_one_through_nine}])"
 medium_unit = f"({alt_digits} | {small_unit}* (({alt_teens} | {alt_tens} {alt_one_through_nine}) {alt_digits} | {alt_tens} (zero | oh)))"
 absolute_unit = f"(({medium_unit} (dupe | quad))* {medium_unit} [trip | quint])"

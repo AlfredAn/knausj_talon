@@ -17,6 +17,20 @@ for key, value in modes.items():
 
 @mod.action_class
 class Actions:
+    def clear_modes():
+        """Clear modes"""
+        actions.mode.disable("sleep")
+        actions.mode.disable("command")
+        actions.mode.disable("dictation")
+        actions.mode.disable("user.pop")
+        actions.mode.disable("user.swedish")
+        actions.mode.disable("user.chess")
+        actions.mode.disable("user.civ5")
+        actions.mode.disable("user.wow")
+        actions.mode.disable("user.gdb")
+        actions.user.code_clear_language_mode()
+        
+
     def talon_mode():
         """For windows and Mac with Dragon, enables Talon commands and Dragon's command mode."""
         actions.speech.enable()

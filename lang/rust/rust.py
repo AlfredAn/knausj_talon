@@ -141,6 +141,10 @@ scalar_types = {
     "you sixty four": "u64",
     "eye one hundred and twenty eight": "i128",
     "you one hundred and twenty eight": "u128",
+    "eye one hundred twenty eight": "i128",
+    "you one hundred twenty eight": "u128",
+    "eye one twenty eight": "i128",
+    "you one twenty eight": "u128",
     "eye size": "isize",
     "you size": "usize",
     "float thirty two": "f32",
@@ -169,6 +173,7 @@ standard_library_types = {
     "hashmap": "HashMap",
     "hash set": "HashSet",
     "reference count": "Rc",
+    "self": "Self",
 }
 
 standard_sync_types = {

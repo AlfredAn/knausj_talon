@@ -81,7 +81,9 @@ state some:
 state none: "None"
 
 do arrow: " -> "
+returns: " -> "
 do dub arrow: " => "
+becomes: " => "
 
 box that:
     "("

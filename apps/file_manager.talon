@@ -18,6 +18,7 @@ go kalman filter: user.file_manager_open_directory("C:\\Users\\Alfred\\cpp\\kalm
 go app data: user.file_manager_open_directory("%AppData%")
 go program files: user.file_manager_open_directory("%programfiles%")
 go user: user.file_manager_open_directory(path.user_home())
+go wow addons: user.file_manager_open_directory("C:\\Program Files (x86)\\World of Warcraft\\_retail_\\Interface\\AddOns")
 go ((c | see) drive | root): user.file_manager_open_volume("C:\\")
 go (d | dee) drive: user.file_manager_open_volume("D:\\")
 go <user.system_path>: user.file_manager_open_directory(system_path)

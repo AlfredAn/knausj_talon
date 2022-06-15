@@ -40,6 +40,7 @@ cargo: insert("cargo ")
 cargo build: insert("cargo build\n")
 cargo run: insert("cargo run\n")
 cargo test: insert("cargo test\n")
+cargo check: insert("cargo check\n")
+cargo format: insert("cargo fmt\n")
 
 rustup: insert("rustup ")
-
