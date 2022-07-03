@@ -7,6 +7,13 @@ spolon: ": "
 nolon:
     ":"
     key(enter)
+question [mark]: "?"
+double dash: "--"
+triple quote: "'''"
+(triple grave | triple back tick | gravy):
+    insert("```")
+(dot dot | dotdot): ".."
+ellipses: "..."
 plus: "+"
 arrow: "->"
 dub arrow: "=>"
