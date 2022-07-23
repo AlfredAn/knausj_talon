@@ -168,7 +168,8 @@ punctuation_words = {
 symbol_key_words = {
     "point": ".",
     "prime": "'",
-    "apostrophe": "'",
+    "quote": "'",
+    "question": "?",
     "square": "[",
     "rare": "]",
     "slash": "/",
