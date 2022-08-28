@@ -27,6 +27,7 @@ class Actions:
         actions.mode.disable("user.chess")
         actions.mode.disable("user.civ5")
         actions.mode.disable("user.wow")
+        actions.mode.disable("user.opus")
         actions.mode.disable("user.gdb")
         actions.user.code_clear_language_mode()
         

@@ -1,3 +1,6 @@
+mode: command
+mode: user.opus
+-
 <number_small> times: core.repeat_command(number_small-1)
 ^<number_small> more: core.repeat_command(number_small)
 dupe: core.repeat_command(1)
